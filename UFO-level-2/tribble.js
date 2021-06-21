@@ -38,55 +38,62 @@ uniqCities.forEach(city => {
     form.append('option').attr('value', city).text(city)
 });
 
-allDates = []
+allStates = []
 data.forEach(report => {
-    var date = report.datetime;
-    allDates.push(date);
+    var state = report.state;
+    allStates.push(state);
 });
-var uniqDates = [...new Set(allDates)];
-console.log(uniqDates);
-
-uniqDates.forEach(date => {
-    var form = d3.select("#form-select");
-    form.append('option').attr('value', date).text(date)
+var uniqStates = [...new Set(allStates)];
+console.log(uniqStates);
+uniqStates.forEach(state => {
+    var form = d3.select("#state-select");
+    form.append('option').attr('value', state).text(state)
 });
 
-allDates = []
+allCountries = []
 data.forEach(report => {
-    var date = report.datetime;
-    allDates.push(date);
+    var country = report.country;
+    allCountries.push(country);
 });
-var uniqDates = [...new Set(allDates)];
-console.log(uniqDates);
-
-uniqDates.forEach(date => {
-    var form = d3.select("#form-select");
-    form.append('option').attr('value', date).text(date)
+var uniqCountries = [...new Set(allCountries)];
+console.log(uniqCountries);
+uniqCountries.forEach(country => {
+    var form = d3.select("#country-select");
+    form.append('option').attr('value', country).text(country)
 });
 
-allDates = []
+allShapes = []
 data.forEach(report => {
-    var date = report.datetime;
-    allDates.push(date);
+    var date = report.shape;
+    allShapes.push(shape);
 });
-var uniqDates = [...new Set(allDates)];
-console.log(uniqDates);
-
-uniqDates.forEach(date => {
-    var form = d3.select("#form-select");
-    form.append('option').attr('value', date).text(date)
+var uniqShapes = [...new Set(allShapes)];
+console.log(uniqShapes);
+uniqShapes.forEach(shape => {
+    var form = d3.select("#shape-select");
+    form.append('option').attr('value', shape).text(shape)
 });
 
 
-///
-var dateSelect = d3.select("#form-select");
-dateSelect.on("input", runEnter);
+//Create event function and filters
+var filterButton = d3.select("#filter-button");
+filterButton.on("click", runEnter);
 
 function runEnter() {
     d3.selectAll('tr').remove();
-    var inputValue = d3.select("#form-select").property("value");
-    var matchingDate = data.filter(report => report.datetime === inputValue);
-    matchingDate.forEach(report => {
+    var inputDate = d3.select("#date-select").property("value");
+    var inputCity = d3.select('#city-select').property("value");
+    var inputState = d3.select('#state-select').property("value");
+    var inputCountry = d3.select('#country-select').property("value");
+    var inputShape = d3.select('#shape-select').property("value");
+    var matchingReport = data.filter(report => {
+        report.datetime === inputDate &&
+        report.city === inputCity &&
+        report.state === inputState &&
+        report.country === inputCountry &&
+        report.shape === inputShape
+    });
+    matchingReport.forEach(report => {
         var row = tableBody.append('tr');
         row.append('td').text(report.datetime);
         row.append('td').text(report.city);
