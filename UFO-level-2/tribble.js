@@ -1,17 +1,21 @@
 // Appending to table in html
 var tableBody = d3.select("tbody");
 
-data.forEach(report => {
-    var row = tableBody.append('tr');
-    row.append('td').text(report.datetime);
-    row.append('td').text(report.city);
-    row.append('td').text(report.state);
-    row.append('td').text(report.country);
-    row.append('td').text(report.shape);
-    row.append('td').text(report.durationMinutes);
-    row.append('td').text(report.comments);
+function runReset() {
+    data.forEach(report => {
+        var row = tableBody.append('tr');
+        row.append('td').text(report.datetime);
+        row.append('td').text(report.city);
+        row.append('td').text(report.state);
+        row.append('td').text(report.country);
+        row.append('td').text(report.shape);
+        row.append('td').text(report.durationMinutes);
+        row.append('td').text(report.comments);
+    
+    });
+};
 
-});
+runReset();
 
 // Creating filters and table updates
 allDates = []
@@ -89,13 +93,11 @@ function runEnter() {
     var inputState = d3.select('#state-select').property("value");
     var inputCountry = d3.select('#country-select').property("value");
     var inputShape = d3.select('#shape-select').property("value");
-    var matchingReport = data.filter(report => {
-        report.datetime === inputDate &&
-        report.city === inputCity &&
-        report.state === inputState &&
-        report.country === inputCountry &&
-        report.shape === inputShape
-    });
+    var matchingReport = data.filter(report => report.datetime === inputDate)
+        .filter(report => report.city === inputCity)
+        .filter(report => report.state === inputState)
+        .filter(report => report.country === inputCountry)
+        .filter(report => report.shape === inputShape);
     matchingReport.forEach(report => {
         var row = tableBody.append('tr');
         row.append('td').text(report.datetime);
@@ -108,16 +110,3 @@ function runEnter() {
     });
 };
 
-function runReset() {
-    data.forEach(report => {
-        var row = tableBody.append('tr');
-        row.append('td').text(report.datetime);
-        row.append('td').text(report.city);
-        row.append('td').text(report.state);
-        row.append('td').text(report.country);
-        row.append('td').text(report.shape);
-        row.append('td').text(report.durationMinutes);
-        row.append('td').text(report.comments);
-    
-    });
-};
