@@ -13,6 +13,7 @@ data.forEach(report => {
 
 });
 
+// Creating filters and table updates
 allDates = []
 data.forEach(report => {
     var date = report.datetime;
