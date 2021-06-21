@@ -42,5 +42,5 @@ function runEnter() {
         row.append('td').text(report.shape);
         row.append('td').text(report.durationMinutes);
         row.append('td').text(report.comments);
-});
+    });
 };
