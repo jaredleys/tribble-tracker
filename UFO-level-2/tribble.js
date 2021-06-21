@@ -2,6 +2,7 @@
 var tableBody = d3.select("tbody");
 
 function runReset() {
+    d3.selectAll('tr').remove();
     data.forEach(report => {
         var row = tableBody.append('tr');
         row.append('td').text(report.datetime);
@@ -88,7 +89,6 @@ resetButton.on("click", runReset);
 
 function runEnter() {
     d3.selectAll('tr').remove();
-    var inputs = [];
     var inputDate = d3.select("#date-select").property("value");
     var inputCity = d3.select('#city-select').property("value");
     var inputState = d3.select('#state-select').property("value");
