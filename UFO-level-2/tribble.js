@@ -88,16 +88,44 @@ resetButton.on("click", runReset);
 
 function runEnter() {
     d3.selectAll('tr').remove();
+    var inputs = [];
     var inputDate = d3.select("#date-select").property("value");
     var inputCity = d3.select('#city-select').property("value");
     var inputState = d3.select('#state-select').property("value");
     var inputCountry = d3.select('#country-select').property("value");
     var inputShape = d3.select('#shape-select').property("value");
-    var matchingReport = data.filter(report => report.datetime === inputDate)
-        .filter(report => report.city === inputCity)
-        .filter(report => report.state === inputState)
-        .filter(report => report.country === inputCountry)
-        .filter(report => report.shape === inputShape);
+    var defaultSelect = /Select a*/;
+    var matchingReport = data
+        .filter(report => {
+            if (defaultSelect.test(inputDate) !== true) {
+                return report.datetime === inputDate
+            }
+            else {return report.datetime === report.datetime}
+        })
+        .filter(report => {
+            if (defaultSelect.test(inputCity) !== true) {
+                return report.city === inputCity
+            }
+            else {return report.city === report.city}
+        })
+        .filter(report => {
+            if (defaultSelect.test(inputState) !== true) {
+                return report.state === inputState
+            }
+            else {return report.state === report.state}
+        })
+        .filter(report => {
+            if (defaultSelect.test(inputCountry) !== true) {
+                return report.country === inputCountry
+            }
+            else {return report.country === report.country}
+        })
+        .filter(report => {
+            if (defaultSelect.test(inputShape) !== true) {
+                return report.shape === inputShape
+            }
+            else {return report.shape === report.shape}
+        });
     matchingReport.forEach(report => {
         var row = tableBody.append('tr');
         row.append('td').text(report.datetime);
