@@ -14,6 +14,7 @@ function runReset() {
         row.append('td').text(report.comments);
     
     });
+    d3.selectAll("select").each(function() {this.selectedIndex = 0})
 };
 
 runReset();
