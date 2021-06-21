@@ -64,7 +64,7 @@ uniqCountries.forEach(country => {
 
 allShapes = []
 data.forEach(report => {
-    var date = report.shape;
+    var shape = report.shape;
     allShapes.push(shape);
 });
 var uniqShapes = [...new Set(allShapes)];
@@ -78,6 +78,9 @@ uniqShapes.forEach(shape => {
 //Create event function and filters
 var filterButton = d3.select("#filter-button");
 filterButton.on("click", runEnter);
+
+var resetButton = d3.select("#reset-button");
+resetButton.on("click", runReset);
 
 function runEnter() {
     d3.selectAll('tr').remove();
@@ -102,5 +105,19 @@ function runEnter() {
         row.append('td').text(report.shape);
         row.append('td').text(report.durationMinutes);
         row.append('td').text(report.comments);
+    });
+};
+
+function runReset() {
+    data.forEach(report => {
+        var row = tableBody.append('tr');
+        row.append('td').text(report.datetime);
+        row.append('td').text(report.city);
+        row.append('td').text(report.state);
+        row.append('td').text(report.country);
+        row.append('td').text(report.shape);
+        row.append('td').text(report.durationMinutes);
+        row.append('td').text(report.comments);
+    
     });
 };
