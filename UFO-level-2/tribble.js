@@ -21,12 +21,64 @@ data.forEach(report => {
 });
 var uniqDates = [...new Set(allDates)];
 console.log(uniqDates);
+uniqDates.forEach(date => {
+    var form = d3.select("#date-select");
+    form.append('option').attr('value', date).text(date)
+});
+
+allCities = []
+data.forEach(report => {
+    var city = report.city;
+    allCities.push(city);
+});
+var uniqCities = [...new Set(allCities)];
+console.log(uniqCities);
+uniqCities.forEach(city => {
+    var form = d3.select("#city-select");
+    form.append('option').attr('value', city).text(city)
+});
+
+allDates = []
+data.forEach(report => {
+    var date = report.datetime;
+    allDates.push(date);
+});
+var uniqDates = [...new Set(allDates)];
+console.log(uniqDates);
 
 uniqDates.forEach(date => {
     var form = d3.select("#form-select");
     form.append('option').attr('value', date).text(date)
 });
 
+allDates = []
+data.forEach(report => {
+    var date = report.datetime;
+    allDates.push(date);
+});
+var uniqDates = [...new Set(allDates)];
+console.log(uniqDates);
+
+uniqDates.forEach(date => {
+    var form = d3.select("#form-select");
+    form.append('option').attr('value', date).text(date)
+});
+
+allDates = []
+data.forEach(report => {
+    var date = report.datetime;
+    allDates.push(date);
+});
+var uniqDates = [...new Set(allDates)];
+console.log(uniqDates);
+
+uniqDates.forEach(date => {
+    var form = d3.select("#form-select");
+    form.append('option').attr('value', date).text(date)
+});
+
+
+///
 var dateSelect = d3.select("#form-select");
 dateSelect.on("input", runEnter);
 
